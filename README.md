@@ -4,6 +4,13 @@
 
 ## 기능
 
+<table>
+  <tr>
+    <td align="center"><img src="images/home.webp" width="400" alt="홈 피드 숨김"><br><sub>홈 피드 숨김</sub></td>
+    <td align="center"><img src="images/watch.webp" width="400" alt="추천·댓글 숨김"><br><sub>추천·댓글 숨김</sub></td>
+  </tr>
+</table>
+
 - **홈 피드 숨김**: 영상 격자, 필터 칩, Shorts 선반을 가리고 안내 문구만 표시
 - **영상 페이지 추천 숨김**: 오른쪽 추천 목록, 하단 추천, 종료 화면 추천
 - **댓글 숨김**: 영상 댓글 영역과 쇼츠 댓글 버튼

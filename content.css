@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+/* =========================================================
+   YouTube Focus
+   모든 규칙은 <html>에 붙는 data-ytf-* 속성으로 켜고 끕니다.
+   검색 결과(ytd-search)는 어떤 규칙에서도 건드리지 않습니다.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. 홈 피드
+   유튜브가 홈 화면에 직접 붙이는 page-subtype="home" 을 기준으로 삼습니다.
+   구독 피드(/feed/subscriptions)나 검색은 subtype이 달라 영향을 받지 않습니다.
+   --------------------------------------------------------- */
+html[data-ytf-home="on"] ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
+html[data-ytf-home="on"] ytd-browse[page-subtype="home"] #contents.ytd-rich-grid-renderer,
+html[data-ytf-home="on"] ytd-browse[page-subtype="home"] ytd-feed-filter-chip-bar-renderer,
+html[data-ytf-home="on"] ytd-browse[page-subtype="home"] #chips-wrapper,
+html[data-ytf-home="on"] ytd-browse[page-subtype="home"] ytd-rich-section-renderer {
+  display: none !important;
+}
+
+/* 첫 화면이 그려지기 전(ytd-browse 생성 전) 한순간 영상이 스쳐 보이는 것을 막습니다. */
+html[data-ytf-home="on"][data-ytf-page="home"] ytd-rich-grid-renderer {
+  display: none !important;
+}
+
+/* 빈 화면 대신 짧은 안내 한 줄 */
+html[data-ytf-home="on"] ytd-browse[page-subtype="home"]:not([hidden]) #primary::before {
+  content: "홈 피드를 가리고 있습니다. 위 검색창으로 볼 영상을 직접 찾아보세요.";
+  display: block;
+  padding: 72px 8px;
+  max-width: 34em;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--yt-spec-text-secondary, #606060);
+}
+
+
+/* ---------------------------------------------------------
+   2. 영상 페이지의 추천 영상
+   #secondary 통째로 숨기지 않고 #related 만 숨겨서
+   재생목록 대기열 · 실시간 채팅은 그대로 남깁니다.
+   --------------------------------------------------------- */
+html[data-ytf-related="on"] ytd-watch-flexy #related,
+html[data-ytf-related="on"] ytd-watch-flexy ytd-watch-next-secondary-results-renderer,
+html[data-ytf-related="on"] ytd-watch-flexy #secondary ytd-compact-video-renderer,
+html[data-ytf-related="on"] ytd-watch-flexy ytd-merch-shelf-renderer {
+  display: none !important;
+}
+
+/* 댓글 옆·아래에 끼어드는 추천 카드 */
+html[data-ytf-related="on"] ytd-watch-flexy ytd-reel-shelf-renderer,
+html[data-ytf-related="on"] ytd-watch-flexy ytd-item-section-renderer[static-item-section] {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   3. 플레이어 위에 뜨는 추천
+   종료 화면 타일, 일시정지 시 뜨는 추천, 카드 티저
+   --------------------------------------------------------- */
+html[data-ytf-endscreen="on"] .ytp-endscreen-content,
+html[data-ytf-endscreen="on"] .ytp-videowall-still,
+html[data-ytf-endscreen="on"] .ytp-pause-overlay,
+html[data-ytf-endscreen="on"] .ytp-ce-element,
+html[data-ytf-endscreen="on"] .ytp-suggestion-set,
+html[data-ytf-endscreen="on"] .ytp-cards-teaser {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   4. 댓글
+   영상 아래 댓글 영역(ytd-comments)과, 쇼츠에서 열리는 댓글 패널,
+   댓글 수를 보여주는 접힌 댓글 미리보기를 숨깁니다.
+   --------------------------------------------------------- */
+html[data-ytf-comments="on"] ytd-watch-flexy ytd-comments#comments,
+html[data-ytf-comments="on"] ytd-watch-flexy #comments,
+html[data-ytf-comments="on"] ytd-comments-entry-point-header-renderer,
+html[data-ytf-comments="on"] ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"],
+html[data-ytf-comments="on"] ytd-shorts #comments-button,
+html[data-ytf-comments="on"] ytd-reel-video-renderer ytd-engagement-panel-section-list-renderer {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   5. 빈 오른쪽 열 정리
+   추천이 사라지면 생기는 여백만큼 본문을 가운데로 옮깁니다.
+   극장 모드·전체화면은 건드리지 않습니다.
+   --------------------------------------------------------- */
+html[data-ytf-center="on"][data-ytf-related="on"]
+  ytd-watch-flexy:not([theater]):not([fullscreen]) #primary.ytd-watch-flexy {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}

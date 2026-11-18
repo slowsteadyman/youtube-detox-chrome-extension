@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Focus",
+  "version": "1.0.0",
+  "description": "홈 피드와 추천 영상을 가립니다. 검색은 그대로 동작합니다.",
+  "permissions": ["storage"],
+  "host_permissions": ["*://*.youtube.com/*"],
+  "action": {
+    "default_title": "YouTube Focus",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "css": ["content.css"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}

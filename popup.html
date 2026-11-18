@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --canvas: #ffffff;
+    --ink: #101418;
+    --muted: #6d7378;
+    --rule: #e6e8eb;
+    --live: #b32b2b;
+    --track: #d4d7da;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --canvas: #16181a;
+      --ink: #f1f3f4;
+      --muted: #9aa0a6;
+      --rule: #2b2e31;
+      --live: #e05252;
+      --track: #3c4043;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    width: 296px;
+    margin: 0;
+    padding: 18px 18px 14px;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: "Pretendard", -apple-system, "Segoe UI", "Apple SD Gothic Neo",
+                 "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  h1 {
+    margin: 0 0 2px;
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  .lede {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .row .text { flex: 1; min-width: 0; }
+
+  .row .name { font-weight: 550; }
+
+  .row .note {
+    margin-top: 1px;
+    color: var(--muted);
+    font-size: 11.5px;
+  }
+
+  .switch {
+    flex: 0 0 auto;
+    margin-top: 2px;
+    width: 34px;
+    height: 20px;
+    padding: 2px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--track);
+    cursor: pointer;
+    transition: background 140ms ease;
+  }
+
+  .switch:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .switch .knob {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    transform: translateX(0);
+    transition: transform 140ms ease;
+  }
+
+  .switch[aria-checked="true"] { background: var(--live); }
+  .switch[aria-checked="true"] .knob { transform: translateX(14px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .switch, .switch .knob { transition: none; }
+  }
+
+  footer {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 11.5px;
+  }
+</style>
+</head>
+<body>
+  <h1>YouTube Focus</h1>
+  <p class="lede">검색과 구독 피드는 평소처럼 쓸 수 있습니다.</p>
+
+  <div class="row">
+    <div class="text">
+      <div class="name">홈 화면 영상 가리기</div>
+      <div class="note">유튜브 첫 화면을 빈 화면으로 둡니다</div>
+    </div>
+    <button class="switch" role="switch" data-key="home" aria-checked="true"
+            aria-label="홈 화면 영상 가리기"><span class="knob"></span></button>
+  </div>
+
+  <div class="row">
+    <div class="text">
+      <div class="name">추천 영상 가리기</div>
+      <div class="note">영상 오른쪽 목록과 하단 추천</div>
+    </div>
+    <button class="switch" role="switch" data-key="related" aria-checked="true"
+            aria-label="추천 영상 가리기"><span class="knob"></span></button>
+  </div>
+
+  <div class="row">
+    <div class="text">
+      <div class="name">종료 화면 가리기</div>
+      <div class="note">재생이 끝나거나 멈췄을 때 뜨는 추천</div>
+    </div>
+    <button class="switch" role="switch" data-key="endscreen" aria-checked="true"
+            aria-label="종료 화면 가리기"><span class="knob"></span></button>
+  </div>
+
+  <div class="row">
+    <div class="text">
+      <div class="name">댓글 가리기</div>
+      <div class="note">영상 아래 댓글 영역 전체 (쇼츠 댓글 포함)</div>
+    </div>
+    <button class="switch" role="switch" data-key="comments" aria-checked="true"
+            aria-label="댓글 가리기"><span class="knob"></span></button>
+  </div>
+
+  <div class="row">
+    <div class="text">
+      <div class="name">영상 가운데 정렬</div>
+      <div class="note">추천이 사라진 빈 여백을 정리합니다</div>
+    </div>
+    <button class="switch" role="switch" data-key="center" aria-checked="true"
+            aria-label="영상 가운데 정렬"><span class="knob"></span></button>
+  </div>
+
+  <footer>바꾼 설정은 열려 있는 유튜브 탭에 바로 적용됩니다.</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
